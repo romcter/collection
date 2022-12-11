@@ -8,7 +8,6 @@ public class Node<T> implements SelfIterator {
     Node<T> next;
     T value;
     Node<T> previous;
-    boolean flagForConsumer;
 
     public Node(Node<T> next, Node<T> previous, T value) {
         this.next = next;

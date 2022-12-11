@@ -6,30 +6,20 @@ import list.iterator.SelfIterator;
 
 import java.util.Objects;
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class SelfLinkedList<T> implements SelfList<T>, SelfCollection {
 
     Node<T> head;
     int size;
 
-    public boolean iterate(Consumer<Node<T>> consumer) {
+    public boolean iterate(Predicate<Node<T>> consumer) {
         Node<T> next = head;
         while (next.hasNext()) {
-            consumer.accept(next);
-            if (next.flagForConsumer) {
-                return true;
-            } else next = next.next;
-        }
-        return false;
-
-//        Map<String, Object> errorMsgMap = new HashMap<>();
-//
-//        consumer.accept(errorMsgMap);
-//
-//        if ( !errorMsgMap.isEmpty()) {
-//            throw new BusinessException(VALIDATION_ERROR.toString(), VALIDATION_FAILED, errorMsgMap);
-//        }
+            if (consumer.test(next))
+                break;
+            next = next.next;
+        } return true;
     }
 
     @Override
@@ -39,19 +29,22 @@ public class SelfLinkedList<T> implements SelfList<T>, SelfCollection {
             size++;
             return true;
         }
-//        iterate(next -> {
+        if (this.head.hasNext()) {
+            return iterate(next -> {
+                if (!next.next.hasNext()) {
+                    return addNewNode(t, next.next);
+                }
+                return false;
+            });
+        } else
+            return addNewNode(t, this.head);
+//        Node<T> next = head;
+//        while (next.hasNext()) {
 //            if (!next.next.hasNext()) {
-//                addNewNode(t, next.next);
+//                return addNewNode(t, next.next);
 //            }
-//        });
-        Node<T> next = head;
-        while (next.hasNext()) {
-            if (!next.next.hasNext()) {
-                return addNewNode(t, next.next);
-            }
-            next = next.next;
-        }
-        return addNewNode(t, this.head);
+//            next = next.next;
+//        }
     }
 
     private boolean addNewNode(T t, Node<T> next){
@@ -94,6 +87,7 @@ public class SelfLinkedList<T> implements SelfList<T>, SelfCollection {
 
     @Override
     public boolean remove(int index) {
+
         return false;
     }
 
