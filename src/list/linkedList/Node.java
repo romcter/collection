@@ -19,27 +19,6 @@ public class Node<T> implements SelfIterator {
         this.value = value;
     }
 
-
-    public Node<T> getNext() {
-        return next;
-    }
-
-    public void setNext(Node<T> next) {
-        this.next = next;
-    }
-
-    public Node<T> getPrevious() {
-        return previous;
-    }
-
-    public void setPrevious(Node<T> previous) {
-        this.previous = previous;
-    }
-
-    public T getValue() {
-        return value;
-    }
-
     @Override
     public boolean hasNext() {
         return this.next != null;
