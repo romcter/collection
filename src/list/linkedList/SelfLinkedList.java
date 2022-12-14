@@ -21,12 +21,11 @@ public class SelfLinkedList<T> implements SelfList<T>, SelfCollection {
         }
         if (this.head.hasNext())
             return iterate(next -> {
-                if (!next.next.hasNext()) {
-                    return addNode(t, next.next);
-                }
-                return false;
-            }
-//            , () -> addNode(t, this.head)
+                        if (!next.next.hasNext()) {
+                            return addNode(t, next.next);
+                        }
+                        return false;
+                    }
             );
         else
             return addNode(t, this.head);
@@ -41,13 +40,11 @@ public class SelfLinkedList<T> implements SelfList<T>, SelfCollection {
     @Override
     public boolean remove(T t) {
         return iterate(node -> {
-            if (node.value.equals(t)) {
-                return removeNode(node);
-            }
-            return false;
-        }
-//        , () ->
-                );
+                    if (node.value.equals(t))
+                        return removeNode(node);
+                    return false;
+                }
+        );
     }
 
     @Override
@@ -64,7 +61,7 @@ public class SelfLinkedList<T> implements SelfList<T>, SelfCollection {
 
     @Override
     public boolean contain(T element) {
-        return iterate(node -> node.value.equals(element));
+        return indexOf(element) >= 0;
     }
 
     @Override
@@ -108,10 +105,11 @@ public class SelfLinkedList<T> implements SelfList<T>, SelfCollection {
 
     @Override
     public String toString() {
-        return "SelfLinkedList{" +
-                "head=" + head +
-                ", size=" + size +
-                '}';
+        return
+                "SelfLinkedList{" +
+                        "head=" + head +
+                        ", size=" + size +
+                        '}';
     }
 
     private boolean addNode(T t, Node<T> next) {
@@ -122,14 +120,14 @@ public class SelfLinkedList<T> implements SelfList<T>, SelfCollection {
         return true;
     }
 
-    private boolean removeNode(Node<T> node){
+    private boolean removeNode(Node<T> node) {
         node.previous.next = node.next;
         node.next.previous = node.previous;
         size--;
         return true;
     }
 
-    private Node<T> getByIndex(int index){
+    private Node<T> getByIndex(int index) {
         Node<T> x = head;
         for (int i = 0; i < index; i++)
             x = x.next;
@@ -137,15 +135,15 @@ public class SelfLinkedList<T> implements SelfList<T>, SelfCollection {
     }
 
     private void checkIndex(int index) {
-        if(index > size || index < 0)
+        if (index > size || index < 0)
             throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
     }
 
     private String outOfBoundsMsg(int index) {
-        return "Index: "+index+", Size: "+size;
+        return "Index: " + index + ", Size: " + size;
     }
 
-    public boolean iterate(Predicate<Node<T>> predicate/*, Supplier consumer*/) {
+    public boolean iterate(Predicate<Node<T>> predicate) {
         Node<T> next = head;
         while (next.hasNext()) {
             if (predicate.test(next))

@@ -28,18 +28,12 @@ public class SelfLinkedListTest {
     @Test
     void testAdd() {
         assertTrue(list.add(userRoman));
-//        assertTrue(list.add(userDen));
-//        assertTrue(list.add(userEugen));
-//        assertTrue(list.add(userJulia));
         assertTrue(list.contain(userRoman));
     }
 
     @Test
     void testContain() {
         list.add(userRoman);
-//        assertTrue(list.add(userDen));
-//        assertTrue(list.add(userEugen));
-//        assertTrue(list.add(userJulia));
         assertTrue(list.contain(userRoman));
 
         assertFalse(list.contain(userUnknown));
