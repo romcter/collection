@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SelfLinkedListTest {
 
-    SelfList<User> list = new SelfLinkedList();
+    SelfList<User> list = new SelfLinkedList<>();
     User userRoman = new User("Roman");
     User userDen = new User("Den");
     User userEugen = new User("Eugen");
