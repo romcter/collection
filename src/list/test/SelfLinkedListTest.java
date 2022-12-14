@@ -41,6 +41,10 @@ public class SelfLinkedListTest {
 
     @Test
     void testIndexOf(){
+
+        int indexMoreThanSize = list.indexOf(userUnknown);
+        assertThrows(IndexOutOfBoundsException.class, () -> list.get(indexMoreThanSize));
+
         addDataToList();
         int indexEugen = list.indexOf(userEugen);
         assertEquals(2, indexEugen);
@@ -56,9 +60,44 @@ public class SelfLinkedListTest {
         int indexJulia = list.indexOf(userJulia);
         User userJulia = list.get(indexJulia);
         assertEquals(this.userJulia, userJulia);
+    }
 
-        int indexUnknown = list.indexOf(userUnknown);
-        assertThrows(IndexOutOfBoundsException.class, () -> list.get(indexUnknown));
+    @Test
+    void testRemoveByIndex() {
+        addDataToList();
+
+        int index = list.indexOf(userEugen);
+        assertTrue(list.remove(index));
+        assertNotEquals(list.get(index), userEugen);
+        assertEquals(-1, list.indexOf(userEugen));
+    }
+
+    @Test
+    void testRemoveByItem() {
+        addDataToList();
+
+        assertTrue(list.remove(userEugen));
+        assertFalse(list.contain(userEugen));
+        assertEquals(-1, list.indexOf(userEugen));
+    }
+
+    @Test
+    void testSize() {
+        assertEquals(0, list.size());
+
+        addDataToList();
+        assertEquals(4, list.size());
+
+        list.remove(userDen);
+        assertEquals(3, list.size());
+    }
+
+    @Test
+    void clear() {
+        addDataToList();
+        assertEquals(4, list.size());
+        assertTrue(list.clear());
+        assertEquals(0, list.size());
     }
 
     private void addDataToList(){
