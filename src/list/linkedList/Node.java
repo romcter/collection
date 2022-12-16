@@ -1,10 +1,8 @@
 package list.linkedList;
 
-import list.iterator.SelfIterator;
-
 import java.util.Objects;
 
-public class Node<T> implements SelfIterator {
+public class Node<T> {
     Node<T> next;
     T value;
     Node<T> previous;
@@ -19,12 +17,10 @@ public class Node<T> implements SelfIterator {
         this.value = value;
     }
 
-    @Override
     public boolean hasNext() {
         return this.next != null;
     }
 
-    @Override
     public Object next() {
         return this.next;
     }

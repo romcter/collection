@@ -1,13 +1,11 @@
 package list.linkedList;
 
 import list.SelfList;
-import list.iterator.SelfCollection;
-import list.iterator.SelfIterator;
 
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class SelfLinkedList<T> implements SelfList<T>, SelfCollection {
+public class SelfLinkedList<T> implements SelfList<T> {
 
     Node<T> head;
     int size;
@@ -83,11 +81,6 @@ public class SelfLinkedList<T> implements SelfList<T>, SelfCollection {
         }
         size = 0;
         return true;
-    }
-
-    @Override
-    public SelfIterator getIterator() {
-        return null;
     }
 
     @Override
